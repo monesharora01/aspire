@@ -1,0 +1,98 @@
+++++++++++++++++++++++++++++++++++++++++++++
+How Project Is Setuped : Internal Knowledge
+++++++++++++++++++++++++++++++++++++++++++++
+
+composer create-project laravel/laravel mini-aspire-app --prefer-dist
+setup .env file
+composer require laravel/passport
+php artisan migrate
+php artisan passport:install
+
+Configure Passport Module:
+app/Models/User.php
+
+Next, open app/Providers/AuthServiceProvider.php file and register the registerPolicies() method inside the boot() function, It will evoke the required routes.
+
+Register the PassportServiceProvider class in providers array inside the config/app.php file
+
+Configure driver for the Passport, get inside the config/auth.php file and make the changes as shown below.
+
++++++++++++++++++++++++++++++++++
+For Client to Share:
++++++++++++++++++++++++++++++++++
+
+1. Extract Zip or clone from git
+
+2. create required database name : mini_aspire
+
+3. run in cmd : php artisan migrate
+
+4. run php artisan db:seed --class=DatabaseSeeder
+this will create a admin with details:
+admin@miniaspireapp.com
+admin@2022
+
+5. Follow the apis as per given project
+
+1. //Customer Register
+http://localhost:8000/api/register
+Header set Aceept - application/json
+
+Request Type - Post
+Request Param -
+name
+email
+password
+
+Response:
+Example:
+Token : 
+eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZjZhMDVmN2ZlNDUxNjlmNjcxNmFjYmVkMWQ2NWI2MGM5ZDNkNDc2YmJlNDBhNTVkZGNjMGIxNmZkMGU4M2E2ZjdkMDdjYjJhZjI3ZTZmNzUiLCJpYXQiOjE2NjQ3OTU1NTIuOTU3Nzk3LCJuYmYiOjE2NjQ3OTU1NTIuOTU3ODAyLCJleHAiOjE2OTYzMzE1NTIuOTUzNTY1LCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.b6UbxNxZ2C0XIOh0iC8wIxNyPSMoQHJFfce0fGNh0LDEToDS4T00RlB3ikKTgiI_fYtPA0N2JTzdflNWY9BrXKXSoecLMHu-54vkBaFhyPz75yOeWLSrNXDfWJt7PE2YcQuMrj4P6LSP5AhVKZOBGrz17ywTedzKl5DJd4GVaTLtJcEZWywEEsAyLnOKxaOw6ryuDYmFebQND0xjsE0FJXtaeCMbZnN2bN2RQrCtw-lyEk87LzFTEF9-acuzOgSvJhzTiSvI2MBUA-UoOlDq10QLA9B4WUuD2K9jkLEkqmCRbNgml9q1fYim5GvQCswy2SYtzCvqmUY52a7mWMFKF3rzXccJFmkYef8dntRJhzU00AkDeXyH0MaIXaS4HUYc9Zfu-JgktKXpGHnrOJej-I3PQiDO_qVmBtnNrOW5EBhfgrI9iM1rCU3wB5uUhxNXPgMZGgP26UKlVr2LkC2SJW6gsxW93cgkIRYrbv0awNZUxY7BJVSFW_kZZKEigjLxBn6ft3W9Oc5lWtmGKipp3M2LISqe9UaQaPewKCJ9AfDYCYvpOhV5qKGxlddznBna8r3t2EunTh_A5zNfryBD0WIuhu7oBp9wVaas4r1anxu640OUlmwt0BUu43ucERsHKF0Q7BvFTh03ax-xuQqX26uclL28RaBBixLdzo0Upik
+
+2. //Login Api (Customer and Admin)
+http://localhost:8000/api/login
+Header set Aceept - application/json
+Request Type - POST
+Request Param -
+email
+password
+
+Response:
+Example:
+Token : 
+eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZGUwNDdlOGQyYWY1OWYyZWQ2ZjFiZjY3NDNmYTFlOGM0MTI3ZDQ5NTllNTAyZGFjNjg5Mzk0MjgyNjU2MjBkYjQ2M2MyZDU2YzE4Y2E4YjAiLCJpYXQiOjE2NjQ3OTU3MTIuNjA3MDQ3LCJuYmYiOjE2NjQ3OTU3MTIuNjA3MDUsImV4cCI6MTY5NjMzMTcxMi42MDA5MzEsInN1YiI6IjIiLCJzY29wZXMiOltdfQ.QXvLsiwLsc5jVWPSQuKDr2TNPoumFZgDRsSCItypfSIYZaNf-jm6o7_I8vgEakazxe6clP5X4qe7FM67GsZ-NGtc-jVE4RyGrI0d6XQy_mPhiUz-8pg-oZdbx01XVwJ2W6Jc0a9HTs_jvST5PZVmA_MxFwR_0zWK7mmlq9ONrnZlq7lfL8q_mBOhJfA_tMSk703UTAJEjuLvvyOMWY-SZTWcbr0-dlODdUss5bbCRzjftXyc8NujkPzgM7NL-NLa8jxZQ55u4OwdM0OmxeFZZ3p2CR9hVpJLIyatLoimJGzcj14GdsXvnHZs4Pzgbfsss0HX5U8TOPRrJ6CfGV6vh0QWZWfOXzWPehLajgjbok-PgQJUvWhU_Y2OQ73yloVXjfCyB2pXxFi8ef6HdrXfTBo67XPC_e2Ngo6mGQN_t9T877VWOzBJ-gWGmbBzn5Azxny5B51dZ65r-5-6uqTFayQVKewlVAyvDPgNF8OuHW_RNC5GpRTNoEHwmO_xSvHglpUmVBK3QNTR7qOc0KNbgOh9WRXTkjpW7rIs_194xVT7CiIxQas0XCb99_UMbRsvhMaZxSEHR3CArowl5T0Pahb6JKxWhebL_S6BFtlJ-ieCNuqzUj-uUeGKBiMkMuH1_KH2OU2DSQ2cXwSvKETjs42QTPxieOTmd4UNuxFwPnU
+
+//Loan Api
+To user furthur loan apis set authorization bearer token:
+
+http://localhost:8000/api/loans
+Header set Aceept - application/json
+
+3. Request TYPE - POST
+Api - create new loan
+Request Param -
+amount - required
+term - required
+
+
+4. Request Type - GET
+http://localhost:8000/api/loans
+Api - retreive all loans
+
+5. Request Type - GET
+http://localhost:8000/api/loans/{uuid}
+Api - retreive speicific loans
+
+
+6. Request Type - POST
+http://localhost:8000/api/loans/apporve/{uuid}
+- Need to use admin bearer token here with customer you will get error
+
+
+7. Request Type - POST
+http://localhost:8000/api/loans/repayment/{id}
+Request Param -
+amount - required (must be greater than or equal to amount to pay)
+
+
+Note: Policy to bind user to loan is we are using user loan relation to fetch data. so whichever user token is used only that specific user related loan will show.
